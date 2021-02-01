@@ -17,7 +17,7 @@ form.addEventListener('submit', addNewTask);
 
 clearBtn.addEventListener('click', clearAllTasks);
 
-filter.addEventListener('keyup', filterTasks);
+filter.addEventListener('input', filterTasks);
 
 
 //the reload button at the top right of navigation
@@ -74,7 +74,17 @@ function clearAllTasks() {
 // Filter tasks function definition 
 function filterTasks(e) {
 
-    console.log("Task Filter ...");
+    All_tasks=document.querySelectorAll('.collection-item')
+    All_tasks.forEach(element => {
+        if(element.textContent.indexOf(filter.value)===-1){
+            element.style.display="none";
+        }
+        else{
+            element.style.display="block"
+        }
+       
+    });
+    
 
 }
 
