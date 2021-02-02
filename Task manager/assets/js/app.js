@@ -11,7 +11,17 @@ const clearBtn = document.querySelector('.clear-tasks');      //the all task cle
 
 const reloadIcon = document.querySelector('.fa');
 
+const desending =document.querySelector('.desend')
 
+const asending = document.querySelector('.assend')
+
+const action=document.querySelector('.card-action')
+
+const drop_button=document.createElement('button')
+
+var des=false
+
+action.appendChild(drop_button) 
 
 form.addEventListener('submit', addNewTask);
 
@@ -19,18 +29,13 @@ clearBtn.addEventListener('click', clearAllTasks);
 
 filter.addEventListener('input', filterTasks);
 
+desending.addEventListener('click', desendingOrder)
 
-//the reload button at the top right of navigation
-   
+asending.addEventListener('click', asendingOrder)
 
-// Event Listener for reload 
 reloadIcon.addEventListener('click', reloadPage);
 
-
- // Remove task event [event delegation]
- taskList.addEventListener('click', removeTask);
-
-// Define UI Variables 
+taskList.addEventListener('click', removeTask);
 
 
 
@@ -56,7 +61,7 @@ li.appendChild(link);
 // Append to ul 
 taskList.appendChild(li);
 
-
+taskInput.value = "";
 e.preventDefault(); //disable form submission
 
 }
@@ -107,3 +112,48 @@ function reloadPage() {
     location.reload();
 }
 
+function desendingOrder(e){
+    if(des===true){
+        return
+    }
+    All_tasks=document.querySelectorAll('.collection-item')
+    n=All_tasks.length
+    All_tasks.forEach(element => {
+        element.style.display="none";
+    });
+
+    
+    for(let i=0; i<n;i++){
+        const li=document.createElement('li');
+        li.className="collection-item";
+        li.appendChild(document.createTextNode(All_tasks[n-i-1].textContent))
+        const link = document.createElement('a');
+        link.className = 'delete-item secondary-content';
+        link.innerHTML = '<i class="fa fa-remove"></i>';
+        li.appendChild(link);
+        taskList.appendChild(li);
+    }
+   des=true
+
+}
+
+function asendingOrder(e){
+    if(des===false){
+        return
+    }
+    All_tasks=document.querySelectorAll('.collection-item')
+    n=All_tasks.length
+    All_tasks.forEach(element => {
+        if (element.style.display==="none"){
+            element.style.display="block";
+        }
+        else{
+            console.log("remove")
+            taskList.removeChild(taskList.lastElementChild);
+        } 
+
+    });
+
+   des=false
+
+}
