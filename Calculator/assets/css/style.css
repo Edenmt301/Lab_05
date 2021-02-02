@@ -1,4 +1,13 @@
-.each_ope,.title{
+.title{
     padding: 2rem;
     text-align: center;
+}
+.each_ope{
+    display: inline;
+    padding: 2rem;
+    text-align: center;
+}
+.operations{
+    text-align: center;
+    align-content: center;
 }
